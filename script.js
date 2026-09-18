@@ -8,8 +8,6 @@ const slideshowPools = {
   hero: 10,
   lifestyle: 13,
   alpha: 8,
-  humiliation: 9,
-  femsubs: 4,
 };
 
 const slideshowElements = document.querySelectorAll('[data-slideshow]');
