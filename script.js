@@ -1,3 +1,71 @@
+const palettePicker = document.querySelector(".palette-picker");
+const paletteButton = document.querySelector("#palette-toggle");
+const paletteMenu = document.querySelector("#palette-menu");
+const paletteStatus = document.querySelector("#palette-status");
+const paletteOptions = [...document.querySelectorAll(".palette-option")];
+const themeColors = {
+  "original-garnet": "#0B0908",
+  "obsidian-gold": "#050505",
+  "ivory-ink": "#F0EADF",
+  "sapphire-platinum": "#10213B",
+  "emerald-brass": "#14241D",
+};
+
+function setPalette(name, save = true) {
+  const selected = paletteOptions.find((option) => option.dataset.themeChoice === name);
+  if (!selected) return;
+
+  document.documentElement.dataset.theme = name;
+  paletteOptions.forEach((option) => {
+    option.setAttribute("aria-pressed", String(option === selected));
+  });
+  paletteStatus.textContent = `${selected.dataset.paletteName} is active.`;
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", themeColors[name]);
+
+  if (save) {
+    try {
+      localStorage.setItem("queen-bailey-original-palette", name);
+    } catch {
+      // The palette still changes when storage is unavailable.
+    }
+  }
+}
+
+function setPaletteMenuOpen(isOpen) {
+  paletteButton.setAttribute("aria-expanded", String(isOpen));
+  paletteMenu.hidden = !isOpen;
+}
+
+paletteButton.addEventListener("click", () => {
+  setPaletteMenuOpen(paletteButton.getAttribute("aria-expanded") !== "true");
+});
+
+paletteOptions.forEach((option) => {
+  option.addEventListener("click", () => {
+    setPalette(option.dataset.themeChoice);
+    setPaletteMenuOpen(false);
+    paletteButton.focus();
+  });
+});
+
+document.addEventListener("click", (event) => {
+  if (!palettePicker.contains(event.target)) setPaletteMenuOpen(false);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && paletteButton.getAttribute("aria-expanded") === "true") {
+    setPaletteMenuOpen(false);
+    paletteButton.focus();
+  }
+});
+
+try {
+  const savedPalette = localStorage.getItem("queen-bailey-original-palette");
+  if (savedPalette) setPalette(savedPalette, false);
+} catch {
+  // Keep the authored default when storage is unavailable.
+}
+
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener('click', () => {
     document.body.dataset.lastAction = link.getAttribute('href');

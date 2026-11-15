@@ -15,6 +15,18 @@ The site is a private-members-club / nightlife-ledger extension of Bailey's publ
 - `--champagne` `#D8CBB4` — large display emphasis and soft luxury detail
 - `--blush` `#E9CFC7` — limited milk-blush editorial wash, never a general UI fill
 
+### Palette Preview
+
+The header palette control keeps the original Garnet palette as the default and lets visitors compare four alternate luxury color directions. The layout and photography remain unchanged.
+
+| Palette | Deep field | Accent | Light field |
+| --- | --- | --- | --- |
+| Original Garnet | #0B0908 | #6E2E2E | #F2EAD9 |
+| Black, Porcelain & Gold | #050505 | #D4AF37 | #FFFFFF |
+| Ivory & Ink | #211D19 | #8D6C38 | #F0EADF |
+| Sapphire & Platinum | #10213B | #C4D1DF | #F0F3F6 |
+| Emerald & Brass | #14241D | #CAB780 | #EFF1E8 |
+
 ## Typography
 
 - Display: DM Serif Display, a calmer editorial serif with enough character for oversized headlines without the brittle hairlines of the previous Bodoni face.
@@ -31,6 +43,7 @@ The site is a private-members-club / nightlife-ledger extension of Bailey's publ
 
 ## Interaction
 
+- The header palette control previews the original Garnet, Obsidian, Ivory, Sapphire, and Emerald color systems. It remembers the selection locally and leaves page structure and image treatment intact.
 - Primary buttons use rosewood fills; hover introduces bone/champagne contrast instead of another saturated fill.
 - Buttons lift on hover and scale to `.97` on press.
 - Links use short, interruptible color / transform transitions with a custom ease-out curve.
